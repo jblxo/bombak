@@ -39,11 +39,11 @@ namespace Bombak
 
                 }
             }
-            g.DrawLine(p, 0, height - 2, 0, 0);
-            g.DrawLine(p, width - 2, 0, 0, 0);
+            g.DrawLine(p, 0, height - 1, 0, 0);
+            g.DrawLine(p, width - 1, 0, 0, 0);
 
-            g.DrawLine(p, 0, height-2, width,  height-2 );
-            g.DrawLine(p,width-2 , 0, width-2, height);
+            g.DrawLine(p, 0, height-1, width,  height-1 );
+            g.DrawLine(p,width-1 , 0, width-1, height);
         }
     }
 }
