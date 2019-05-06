@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Bombak
 {
-
     class Bomb : Entity
     {
         private int radius = 3;
