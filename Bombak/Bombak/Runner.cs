@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bombak
 {
-    class Runner
+    class Runner : Entity
     {
+        public Runner() : base()
+        {
+
+        }
+
+        public override void Draw(Graphics g)
+        {
+            g.FillEllipse(new SolidBrush(this.color), this.rect);
+        }
     }
 }
