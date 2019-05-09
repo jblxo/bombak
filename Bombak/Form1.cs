@@ -14,6 +14,8 @@ namespace Bombak
     {
         private int x;
         private int y;
+        private EntityFactory factory;
+        private List<Entity> runners;
 
         public Form1()
         {
@@ -21,6 +23,8 @@ namespace Bombak
 
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
+            factory = new EntityFactory();
+            runners = new List<Entity>();
         }
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
@@ -49,6 +53,14 @@ namespace Bombak
 
             g.DrawLine(p, 0, height - 1, width, height - 1);
             g.DrawLine(p, width - 1, 0, width - 1, height);
+        }
+
+        private void generateRunners()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                runners.Add(factory.GenerateEntity("RUNNER"));
+            }
         }
     }
 }
