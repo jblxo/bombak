@@ -25,6 +25,11 @@ namespace Bombak
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            drawField(e);
+        }
+
+        private void drawField(PaintEventArgs e)
+        {
             int height = pictureBox1.Height;
             int width = pictureBox1.Width;
             Graphics g = e.Graphics;
@@ -42,8 +47,8 @@ namespace Bombak
             g.DrawLine(p, 0, height - 1, 0, 0);
             g.DrawLine(p, width - 1, 0, 0, 0);
 
-            g.DrawLine(p, 0, height-1, width,  height-1 );
-            g.DrawLine(p,width-1 , 0, width-1, height);
+            g.DrawLine(p, 0, height - 1, width, height - 1);
+            g.DrawLine(p, width - 1, 0, width - 1, height);
         }
     }
 }
