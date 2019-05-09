@@ -12,9 +12,40 @@ namespace Bombak
 {
     public partial class SetField : Form
     {
+        private int x;
+        private int y;
+
         public SetField()
         {
             InitializeComponent();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            x = (int) numericUpDownX.Value;
+            y = (int) numericUpDownY.Value;
+            Settings.Instance.fieldSize.Width = x;
+            Settings.Instance.fieldSize.Height = y;
+
+            openMainForm();
+        }
+
+        private void openMainForm()
+        {
+            Form1 mainForm = new Form1();
+
+            mainForm.FormClosed += mainFormClosed;
+
+            mainForm.Show();
+            mainForm.Focus();
+            this.Hide();
+
+        }
+
+        private void mainFormClosed(object sender, EventArgs e)
+        {
+            this.Show();
+            this.Focus();
         }
     }
 }

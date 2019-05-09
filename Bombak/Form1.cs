@@ -12,15 +12,15 @@ namespace Bombak
 {
     public partial class Form1 : Form
     {
+        private int x;
+        private int y;
+
         public Form1()
         {
             InitializeComponent();
-        }
-        private int x;
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            x = (int)numericUpDown1.Value;
-            pictureBox1.Refresh();
+
+            x = Settings.Instance.fieldSize.Width;
+            y = Settings.Instance.fieldSize.Height;
         }
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
@@ -37,10 +37,10 @@ namespace Bombak
 
             for (int i = 0; i < x; i++)
             {
-                for (int j = 0; j < x; j++)
+                for (int j = 0; j < y; j++)
                 {
                     g.DrawLine(p, 0, j * height / x, width, j * height / x);
-                    g.DrawLine(p, i * height / x, 0, i * height / x, height);
+                    g.DrawLine(p, i * height / y, 0, i * height / y, height);
 
                 }
             }
