@@ -34,15 +34,14 @@ namespace Bombak
         {
             Form1 mainForm = new Form1();
 
-            mainForm.FormClosed += mainFormClosed;
+            mainForm.FormClosing += mainFormClosing;
 
             mainForm.Show();
             mainForm.Focus();
             this.Hide();
-
         }
 
-        private void mainFormClosed(object sender, EventArgs e)
+        private void mainFormClosing(object sender, FormClosingEventArgs e)
         {
             this.Show();
             this.Focus();
