@@ -9,10 +9,12 @@ namespace Bombak
 {
     class Runner : Entity
     {
-        public Runner() : base()
+        
+
+        public Runner(Point p) : base()
         {
             this.color = Color.Blue;
-            this.position = new Point(50, 50);
+            this.position = p;
             this.size = new Size(50, 50);
             this.rect = new Rectangle(this.position, this.size);
         }

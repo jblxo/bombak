@@ -91,7 +91,6 @@ namespace Bombak
             {
                 while(appRunning)
                 {
-                    Console.WriteLine("UPDATE");
 
                     deltaTime += 0.05f;
 
@@ -112,10 +111,15 @@ namespace Bombak
         
         private void generateRunners()
         {
-            for (int i = 0; i < 5; i++)
+            Random r = new Random();
+            for (int i = 0; i < 20; i++)
             {
-                runners.Add(factory.GenerateEntity("RUNNER"));
+                int x = r.Next(0, 10) * 50;
+                int y = r.Next(0, 10) * 50;
+                Point p = new Point(x, y);
+                runners.Add(factory.GenerateEntity("RUNNER",p));
             }
+            
         }
 
         private void drawThreadFunc()
@@ -124,7 +128,6 @@ namespace Bombak
 
             while (appRunning)
             {
-                Console.WriteLine("DRAW");
                 updateField(pictureBox1);
                 
                 Thread.Sleep(50);
@@ -137,6 +140,11 @@ namespace Bombak
                 Invoke(new MethodInvoker(() => { updateField(pb); }));
             else
                 pb.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(runners[2]);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
