@@ -28,6 +28,8 @@ namespace Bombak
             updateThread = new Thread(new ThreadStart(updateThreadFunc));
             factory = new EntityFactory();
             runners = new List<Entity>();
+            generateRunners();
+            updateThread.Start();
         }
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
