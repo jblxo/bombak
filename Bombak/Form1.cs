@@ -20,6 +20,7 @@ namespace Bombak
         private EntityFactory factory;
         private List<Entity> runners;
         private float deltaTime;
+        private bool appRunning;
 
         public Form1()
         {
@@ -37,6 +38,7 @@ namespace Bombak
             factory = new EntityFactory();
             runners = new List<Entity>();
             deltaTime = 0.00f;
+            appRunning = true;
             generateRunners();
             updateThread.Start();
             drawThread.Start();
@@ -87,8 +89,10 @@ namespace Bombak
         {
             try
             {
-                while(true)
+                while(appRunning)
                 {
+                    Console.WriteLine("UPDATE");
+
                     deltaTime += 0.05f;
 
                     foreach(Entity runner in runners)
@@ -118,8 +122,9 @@ namespace Bombak
         {
             // Runners draw logic here
 
-            while (true)
+            while (appRunning)
             {
+                Console.WriteLine("DRAW");
                 updateField(pictureBox1);
                 
                 Thread.Sleep(50);
@@ -132,6 +137,14 @@ namespace Bombak
                 Invoke(new MethodInvoker(() => { updateField(pb); }));
             else
                 pb.Refresh();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            appRunning = false;
+            e.Cancel = true;
+            this.Hide();
+            this.Parent = null;
         }
     }
 }
