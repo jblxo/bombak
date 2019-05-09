@@ -16,6 +16,8 @@ namespace Bombak
         private int x;
         private int y;
         private Thread updateThread;
+        private EntityFactory factory;
+        private List<Entity> runners;
 
         public Form1()
         {
@@ -24,6 +26,8 @@ namespace Bombak
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
             updateThread = new Thread(new ThreadStart(updateThreadFunc));
+            factory = new EntityFactory();
+            runners = new List<Entity>();
         }
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
@@ -64,6 +68,14 @@ namespace Bombak
             {
                 // Log errors ?
                 Console.WriteLine(e);
+            }
+        }
+        
+        private void generateRunners()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                runners.Add(factory.GenerateEntity("RUNNER"));
             }
         }
     }
