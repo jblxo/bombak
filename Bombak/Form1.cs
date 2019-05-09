@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ namespace Bombak
     {
         private int x;
         private int y;
+        private Thread updateThread;
 
         public Form1()
         {
@@ -21,6 +23,7 @@ namespace Bombak
 
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
+            updateThread = new Thread(new ThreadStart(updateThreadFunc));
         }
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
@@ -49,6 +52,19 @@ namespace Bombak
 
             g.DrawLine(p, 0, height - 1, width, height - 1);
             g.DrawLine(p, width - 1, 0, width - 1, height);
+        }
+
+        private void updateThreadFunc()
+        {
+            try
+            {
+                // TODO: add update functionality
+            }
+            catch (Exception e)
+            {
+                // Log errors ?
+                Console.WriteLine(e);
+            }
         }
     }
 }
