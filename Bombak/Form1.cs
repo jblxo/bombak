@@ -103,10 +103,15 @@ namespace Bombak
         
         private void generateRunners()
         {
+            Random r = new Random();
             for (int i = 0; i < 20; i++)
             {
-                runners.Add(factory.GenerateEntity("RUNNER"));
+                int x = r.Next(0, 10) * 50;
+                int y = r.Next(0, 10) * 50;
+                Point p = new Point(x, y);
+                runners.Add(factory.GenerateEntity("RUNNER",p));
             }
+            
         }
 
         private void drawRunners(PaintEventArgs e){
@@ -132,6 +137,11 @@ namespace Bombak
                 Invoke(new MethodInvoker(() => { updateField(pictureBox1); }));
             else
                 pb.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(runners[2]);
         }
     }
 }

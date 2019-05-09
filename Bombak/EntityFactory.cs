@@ -10,6 +10,9 @@ namespace Bombak
     class EntityFactory
     {
         private Random r;
+        private Random rnd;
+        private int x;
+        private int y;
         private Point mousePosition = new Point();
         public Point MousePosition
         {
@@ -22,12 +25,12 @@ namespace Bombak
             r = new Random();
         }
 
-        public Entity GenerateEntity(string entityType)
+        public Entity GenerateEntity(string entityType,Point p)
         {
             switch (entityType)
             {
                 case "RUNNER":
-                    return new Runner();
+                    return new Runner(p);
                 case "BOMB":
                     return new Bomb(mousePosition);
                 default:
