@@ -16,7 +16,7 @@ namespace Bombak
         public Bomb(Point position)
         {
             this.position = position;
-            Size computedSize = new Size(this.size, this.size);
+            Size computedSize = new Size(this.size.Width, this.size.Height);
             this.rect = new Rectangle(this.position, computedSize);
         }
 

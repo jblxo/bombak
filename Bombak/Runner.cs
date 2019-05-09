@@ -11,7 +11,10 @@ namespace Bombak
     {
         public Runner() : base()
         {
-
+            this.color = Color.Blue;
+            this.position = new Point(50, 50);
+            this.size = new Size(10, 10);
+            this.rect = new Rectangle(this.position, this.size);
         }
 
         public override void Draw(Graphics g)

@@ -10,7 +10,7 @@ namespace Bombak
     abstract class Entity
     {
         protected Point position;
-        protected int size;
+        protected Size size;
         protected Color color;
         protected Rectangle rect;
 

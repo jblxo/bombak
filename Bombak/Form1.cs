@@ -16,8 +16,10 @@ namespace Bombak
         private int x;
         private int y;
         private Thread updateThread;
+        private Thread drawThread;
         private EntityFactory factory;
         private List<Entity> runners;
+        private float deltaTime;
 
         public Form1()
         {
@@ -26,15 +28,22 @@ namespace Bombak
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
             updateThread = new Thread(new ThreadStart(updateThreadFunc));
+            drawThread = new Thread(new ThreadStart(drawThreadFunc));
             factory = new EntityFactory();
             runners = new List<Entity>();
+            deltaTime = 0.00f;
             generateRunners();
             updateThread.Start();
+            drawThread.Start();
         }
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
             drawField(e);
+            foreach (Entity runner in runners)
+            {
+                runner.Draw(e.Graphics);
+            }
         }
 
         private void drawField(PaintEventArgs e)
@@ -73,7 +82,17 @@ namespace Bombak
         {
             try
             {
-                // TODO: add update functionality
+                while(true)
+                {
+                    deltaTime += 0.05f;
+
+                    foreach(Entity runner in runners)
+                    {
+                        runner.Update(deltaTime);
+
+                        Thread.Sleep(50);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -88,6 +107,31 @@ namespace Bombak
             {
                 runners.Add(factory.GenerateEntity("RUNNER"));
             }
+        }
+
+        private void drawRunners(PaintEventArgs e){
+            Graphics g = e.Graphics;     
+        }
+
+        private void drawThreadFunc()
+        {
+            // Runners draw logic here
+            // Call thread start somewhere with the parameter
+
+            while (true)
+            {
+                updateField(pictureBox1);
+                
+                Thread.Sleep(50);
+            }
+        }
+
+        private void updateField(PictureBox pb)
+        {
+            if (pb.InvokeRequired)
+                Invoke(new MethodInvoker(() => { updateField(pictureBox1); }));
+            else
+                pb.Refresh();
         }
     }
 }
