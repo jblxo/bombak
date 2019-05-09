@@ -13,7 +13,7 @@ namespace Bombak
         {
             this.color = Color.Blue;
             this.position = new Point(50, 50);
-            this.size = new Size(10, 10);
+            this.size = new Size(50, 50);
             this.rect = new Rectangle(this.position, this.size);
         }
 
@@ -24,7 +24,16 @@ namespace Bombak
 
         public override void Update(float deltaTime)
         {
-            throw new NotImplementedException();
+            Random r = new Random();
+            int x = r.Next(0, Settings.Instance.fieldSizePx.Width);
+            int y = r.Next(0, Settings.Instance.fieldSizePx.Height);
+            updateRectPosition(x, y);
+        }
+
+        private void updateRectPosition(int x, int y)
+        {
+            this.rect.X = x;
+            this.rect.Y = y;
         }
     }
 }

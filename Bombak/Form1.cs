@@ -25,6 +25,11 @@ namespace Bombak
         {
             InitializeComponent();
 
+            this.DoubleBuffered = true;
+
+            Settings.Instance.fieldSizePx.Width = pictureBox1.Width - 1;
+            Settings.Instance.fieldSizePx.Height = pictureBox1.Height -1;
+
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
             updateThread = new Thread(new ThreadStart(updateThreadFunc));
@@ -103,20 +108,15 @@ namespace Bombak
         
         private void generateRunners()
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 5; i++)
             {
                 runners.Add(factory.GenerateEntity("RUNNER"));
             }
         }
 
-        private void drawRunners(PaintEventArgs e){
-            Graphics g = e.Graphics;     
-        }
-
         private void drawThreadFunc()
         {
             // Runners draw logic here
-            // Call thread start somewhere with the parameter
 
             while (true)
             {
@@ -129,7 +129,7 @@ namespace Bombak
         private void updateField(PictureBox pb)
         {
             if (pb.InvokeRequired)
-                Invoke(new MethodInvoker(() => { updateField(pictureBox1); }));
+                Invoke(new MethodInvoker(() => { updateField(pb); }));
             else
                 pb.Refresh();
         }
