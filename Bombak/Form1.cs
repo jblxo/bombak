@@ -91,7 +91,6 @@ namespace Bombak
             {
                 while(appRunning)
                 {
-                    Console.WriteLine("UPDATE");
 
                     deltaTime += 0.05f;
 
@@ -129,7 +128,6 @@ namespace Bombak
 
             while (appRunning)
             {
-                Console.WriteLine("DRAW");
                 updateField(pictureBox1);
                 
                 Thread.Sleep(50);
@@ -147,6 +145,8 @@ namespace Bombak
         private void button1_Click(object sender, EventArgs e)
         {
             Console.WriteLine(runners[2]);
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             appRunning = false;
