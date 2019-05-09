@@ -39,25 +39,34 @@ namespace Bombak
 
         private void drawField(PaintEventArgs e)
         {
-            int height = pictureBox1.Height;
-            int width = pictureBox1.Width;
+            int height = pictureBox1.Height-1;
+            int width = pictureBox1.Width-1;
             Graphics g = e.Graphics;
             Pen p = Pens.Black;
-
-            for (int i = 0; i < x; i++)
+            int n;
+            int m1 = 0;
+            int m2 = 0;
+            if (x < y)
             {
-                for (int j = 0; j < y; j++)
+                n = y;  
+                m1 = width / n * (y-x)+1;
+
+            }else
+            {
+                n = x;
+                m2 = height / n * (x-y)+1;
+            }
+                
+            for (int i = 0; i < x+1; i++)
+            {
+                for (int j = 0; j < y+1; j++)
                 {
-                    g.DrawLine(p, 0, j * height / x, width, j * height / x);
-                    g.DrawLine(p, i * height / y, 0, i * height / y, height);
+                    g.DrawLine(p, 0, j * height / n, width - m1, j * height / n);
+                    g.DrawLine(p, i * height / n, 0, i * height / n, height-m2);
 
                 }
             }
-            g.DrawLine(p, 0, height - 1, 0, 0);
-            g.DrawLine(p, width - 1, 0, 0, 0);
-
-            g.DrawLine(p, 0, height - 1, width, height - 1);
-            g.DrawLine(p, width - 1, 0, width - 1, height);
+            
         }
 
         private void updateThreadFunc()
