@@ -11,7 +11,11 @@ namespace Bombak
     {
         private Random r;
         private Point mousePosition = new Point();
-        public Point MousePosition { get; set; }
+        public Point MousePosition
+        {
+            get { return mousePosition; }
+            set { mousePosition = value; }
+        }
 
         public EntityFactory()
         {
