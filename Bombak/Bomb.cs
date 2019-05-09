@@ -24,5 +24,10 @@ namespace Bombak
         {
             g.FillEllipse(new SolidBrush(this.color), rect);
         }
+
+        public override void Update(float deltaTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
