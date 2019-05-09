@@ -20,5 +20,6 @@ namespace Bombak
         }
 
         public abstract void Draw(Graphics g);
+        public abstract void Update(float deltaTime);
     }
 }
