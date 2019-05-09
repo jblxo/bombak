@@ -20,10 +20,16 @@ namespace Bombak
         private EntityFactory factory;
         private List<Entity> runners;
         private float deltaTime;
+        private bool appRunning;
 
         public Form1()
         {
             InitializeComponent();
+
+            this.DoubleBuffered = true;
+
+            Settings.Instance.fieldSizePx.Width = pictureBox1.Width - 1;
+            Settings.Instance.fieldSizePx.Height = pictureBox1.Height -1;
 
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
@@ -32,6 +38,7 @@ namespace Bombak
             factory = new EntityFactory();
             runners = new List<Entity>();
             deltaTime = 0.00f;
+            appRunning = true;
             generateRunners();
             updateThread.Start();
             drawThread.Start();
@@ -82,8 +89,10 @@ namespace Bombak
         {
             try
             {
-                while(true)
+                while(appRunning)
                 {
+                    Console.WriteLine("UPDATE");
+
                     deltaTime += 0.05f;
 
                     foreach(Entity runner in runners)
@@ -114,17 +123,13 @@ namespace Bombak
             
         }
 
-        private void drawRunners(PaintEventArgs e){
-            Graphics g = e.Graphics;     
-        }
-
         private void drawThreadFunc()
         {
             // Runners draw logic here
-            // Call thread start somewhere with the parameter
 
-            while (true)
+            while (appRunning)
             {
+                Console.WriteLine("DRAW");
                 updateField(pictureBox1);
                 
                 Thread.Sleep(50);
@@ -134,7 +139,7 @@ namespace Bombak
         private void updateField(PictureBox pb)
         {
             if (pb.InvokeRequired)
-                Invoke(new MethodInvoker(() => { updateField(pictureBox1); }));
+                Invoke(new MethodInvoker(() => { updateField(pb); }));
             else
                 pb.Refresh();
         }
@@ -142,6 +147,12 @@ namespace Bombak
         private void button1_Click(object sender, EventArgs e)
         {
             Console.WriteLine(runners[2]);
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            appRunning = false;
+            e.Cancel = true;
+            this.Hide();
+            this.Parent = null;
         }
     }
 }
