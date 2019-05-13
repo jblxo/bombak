@@ -17,9 +17,6 @@ namespace Bombak
         private int y;
         private Thread updateThread;
         private Thread drawThread;
-        private EntityFactory factory;
-        private List<Entity> runners;
-        private List<Entity> runnersToBeAdded;
         private float deltaTime;
         private bool appRunning;
 
@@ -37,9 +34,6 @@ namespace Bombak
 
             updateThread = new Thread(new ThreadStart(updateThreadFunc));
             drawThread = new Thread(new ThreadStart(drawThreadFunc));
-            factory = new EntityFactory();
-            runners = new List<Entity>();
-            runnersToBeAdded = new List<Entity>();
             deltaTime = 0.00f;
             appRunning = true;
             generateRunners();
@@ -53,17 +47,11 @@ namespace Bombak
             {
                 while(appRunning)
                 {
-                    Console.WriteLine(deltaTime);
-
-                    if (runnersToBeAdded.Count > 0)
-                    {
-                        runners.AddRange(runnersToBeAdded);
-                        runnersToBeAdded.Clear();
-                    }
-
                     deltaTime += 0.05f;
 
-                    foreach(Entity runner in runners)
+                    EntityFactory.Instance.addRunners();
+
+                    foreach(Entity runner in EntityFactory.Instance.Runners)
                     {
                         runner.Update(deltaTime);
 
@@ -80,12 +68,12 @@ namespace Bombak
         
         private void generateRunners()
         {
-            Random r = new Random();
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
-                runners.Add(factory.GenerateEntity("RUNNER"));
+                EntityFactory.Instance.createRunner();
             }
-            
+
+            EntityFactory.Instance.addRunners();
         }
 
         private void drawThreadFunc()
@@ -110,7 +98,7 @@ namespace Bombak
 
         private void button1_Click(object sender, EventArgs e)
         {
-            runnersToBeAdded.Add(factory.GenerateEntity("RUNNER"));
+            EntityFactory.Instance.createRunner();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

@@ -15,7 +15,7 @@ namespace Bombak
 
         public Runner(Point p) : base()
         {
-            this.speed = (float) r.Next(1, 50) / 100;
+            this.speed = (float) r.Next(1, 50) / 10;
             this.cellSize.Width = Settings.Instance.cellSize.Width;
             this.cellSize.Height = Settings.Instance.cellSize.Height;
             this.color = Color.Blue;
@@ -34,6 +34,8 @@ namespace Bombak
         {
             if (deltaTime > lastUpdate * speed)
             {
+                Console.WriteLine("MOVE");
+
                 int x = Math.Min(r.Next(0, Settings.Instance.fieldSize.Width) * cellSize.Width, Settings.Instance.fieldSizePx.Width);
                 int y = Math.Min(r.Next(0, Settings.Instance.fieldSize.Height) * cellSize.Height, Settings.Instance.fieldSizePx.Height);
                 updateRectPosition(x, y);

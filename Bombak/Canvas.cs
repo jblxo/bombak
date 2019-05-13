@@ -15,6 +15,8 @@ namespace Bombak
         private Size size;
         private float x;
         private float y;
+        private float sizeX;
+        private float sizeY;
         public PictureBox Pb { get { return this.pictureBox; } }
         public Canvas()
         {
@@ -23,13 +25,15 @@ namespace Bombak
             size = new Size(this.pictureBox.Width - 1, this.pictureBox.Height - 1);
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
+            sizeX = size.Width / x;
+            sizeY = size.Height / y;
+
+            Settings.Instance.cellSize.Width = (int) sizeX;
+            Settings.Instance.cellSize.Height = (int) sizeY;
         }
 
         private void drawField(Graphics g)
-        {
-            float sizeX = size.Width / x;
-            float sizeY = size.Height / y;
-
+        {        
             for (int i = 0; i < x + 1; i++)
             {
                 for(int j = 0; j < y + 1; j++)
@@ -40,8 +44,17 @@ namespace Bombak
             }
         }
 
+        private void drawEntities(List<Entity> entities, Graphics g)
+        {
+            foreach(Entity entity in entities)
+            {
+                entity.Draw(g);
+            }
+        }
+
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
+            drawEntities(EntityFactory.Instance.Runners, e.Graphics);
             drawField(e.Graphics);
         }
     }
