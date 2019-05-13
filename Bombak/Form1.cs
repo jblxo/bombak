@@ -33,31 +33,24 @@ namespace Bombak
             int height = pictureBox1.Height-1;
             int width = pictureBox1.Width-1;
             Graphics g = e.Graphics;
-            Pen p = Pens.Black;
+            Pen p = new Pen(Brushes.Black);
             int n;
-            int m1 = 0;
-            int m2 = 0;
             if (x < y)
             {
-                n = y;  
-                m1 = width / n * (y-x)+1;
-
-            }else
+                n = y;
+            }
+            else
             {
                 n = x;
-                m2 = height / n * (x-y)+1;
             }
-                
-            for (int i = 0; i < x+1; i++)
+            int m = width / n;
+            for (int i = 0; i < x; i++)
             {
-                for (int j = 0; j < y+1; j++)
+                for (int j = 0; j < y; j++)
                 {
-                    g.DrawLine(p, 0, j * height / n, width - m1, j * height / n);
-                    g.DrawLine(p, i * height / n, 0, i * height / n, height-m2);
-
+                    g.DrawRectangle(p, i * m, j * m, m, m);
                 }
             }
-            
         }
     }
 }
