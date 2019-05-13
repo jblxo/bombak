@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Bombak
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private int x;
         private int y;
@@ -22,14 +22,11 @@ namespace Bombak
         private float deltaTime;
         private bool appRunning;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
             this.DoubleBuffered = true;
-
-            Settings.Instance.fieldSizePx.Width = pictureBox1.Width - 1;
-            Settings.Instance.fieldSizePx.Height = pictureBox1.Height -1;
 
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
@@ -42,41 +39,6 @@ namespace Bombak
             generateRunners();
             updateThread.Start();
             drawThread.Start();
-        }
-
-        private void PictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            drawField(e);
-            foreach (Entity runner in runners)
-            {
-                runner.Draw(e.Graphics);
-            }
-        }
-
-        private void drawField(PaintEventArgs e)
-        {
-            int height = pictureBox1.Height - 1;
-            int width = pictureBox1.Width - 1;
-            Graphics g = e.Graphics;
-            Pen p = new Pen(Brushes.Black);
-            int n;
-            if (x < y)
-            {
-                n = y;
-            }
-            else
-            {
-                n = x;
-            }
-            int m = width / n;
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    g.DrawRectangle(p, i * m, j * m, m, m);
-                }
-            }
-
         }
 
         private void updateThreadFunc()
@@ -122,7 +84,7 @@ namespace Bombak
 
             while (appRunning)
             {
-                updateField(pictureBox1);
+                updateField(canvas.Pb);
                 
                 Thread.Sleep(50);
             }

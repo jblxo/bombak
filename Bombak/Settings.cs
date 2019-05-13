@@ -10,9 +10,9 @@ namespace Bombak
     class Settings
     {
         public static Settings Instance = new Settings();
-        public Size fieldSize = new Size();
-        public Size fieldSizePx = new Size();
-        public int speed;
+        public Size fieldSize = new Size(10, 10);
+        public Size fieldSizePx = new Size(501, 501);
+        public int speed = 1;
 
         public Settings() { }
     }

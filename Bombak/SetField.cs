@@ -32,7 +32,7 @@ namespace Bombak
 
         private void openMainForm()
         {
-            Form1 mainForm = new Form1();
+            MainForm mainForm = new MainForm();
 
             mainForm.FormClosing += mainFormClosing;
 
