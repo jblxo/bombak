@@ -16,8 +16,8 @@ namespace Bombak
         public Bomb(Point position)
         {
             this.position = position;
-            Size computedSize = new Size(this.size.Width, this.size.Height);
-            this.rect = new Rectangle(this.position, computedSize);
+            SizeF computedSize = new SizeF(this.size.Width, this.size.Height);
+            this.rect = new RectangleF(this.position, computedSize);
         }
 
         public override void Draw(Graphics g)

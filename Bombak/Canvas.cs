@@ -23,6 +23,7 @@ namespace Bombak
             InitializeComponent();
 
             size = new Size(this.pictureBox.Width - 1, this.pictureBox.Height - 1);
+            Settings.Instance.fieldSizePx = size;
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
             sizeX = size.Width / x;

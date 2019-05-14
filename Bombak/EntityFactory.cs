@@ -35,9 +35,9 @@ namespace Bombak
 
         public void createRunner()
         {
-            int x = Math.Min(r.Next(0, Settings.Instance.fieldSize.Width) * Settings.Instance.cellSize.Width, Settings.Instance.fieldSizePx.Width);
-            int y = Math.Min(r.Next(0, Settings.Instance.fieldSize.Height) * Settings.Instance.cellSize.Height, Settings.Instance.fieldSizePx.Height);
-            runnersToBeAdded.Add(new Runner(new Point(x, y)));
+            float x = Math.Min(r.Next(0, (int) Settings.Instance.fieldSize.Width) * Settings.Instance.cellSize.Width, Settings.Instance.fieldSizePx.Width);
+            float y = Math.Min(r.Next(0, (int) Settings.Instance.fieldSize.Height) * Settings.Instance.cellSize.Height, Settings.Instance.fieldSizePx.Height);
+            runnersToBeAdded.Add(new Runner(new PointF(x, y)));
         }
 
         public void createBomb()

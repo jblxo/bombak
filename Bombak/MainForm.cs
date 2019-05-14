@@ -13,8 +13,8 @@ namespace Bombak
 {
     public partial class MainForm : Form
     {
-        private int x;
-        private int y;
+        private float x;
+        private float y;
         private Thread updateThread;
         private Thread drawThread;
         private float deltaTime;
@@ -104,6 +104,8 @@ namespace Bombak
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             appRunning = false;
+            EntityFactory.Instance.Runners.Clear();
+            EntityFactory.Instance.RunnersToBeAdded.Clear();
             e.Cancel = true;
             this.Hide();
             this.Parent = null;

@@ -10,18 +10,21 @@ namespace Bombak
     class Runner : Entity
     {
         private static Random r = new Random();
-        private Size cellSize = new Size();
+        private SizeF cellSize = new Size();
         private float speed = 0.5f;
 
-        public Runner(Point p) : base()
+        public Runner(PointF p) : base()
         {
             this.speed = (float) r.Next(1, 50) / 10;
             this.cellSize.Width = Settings.Instance.cellSize.Width;
             this.cellSize.Height = Settings.Instance.cellSize.Height;
-            this.color = Color.Blue;
+            int red = r.Next(0, 256);
+            int blue = r.Next(0, 256);
+            int green = r.Next(0, 256);
+            this.color = Color.FromArgb(red, green, blue);
             this.position = p;
-            this.size = new Size(cellSize.Width, cellSize.Height);
-            this.rect = new Rectangle(this.position, this.size);
+            this.size = new SizeF(cellSize.Width, cellSize.Height);
+            this.rect = new RectangleF(this.position, this.size);
         }
 
         public override void Draw(Graphics g)
@@ -34,19 +37,43 @@ namespace Bombak
         {
             if (deltaTime > lastUpdate * speed)
             {
-                Console.WriteLine("MOVE");
+                int direction = r.Next(0, 4);
+                float x = this.rect.X;
+                float y = this.rect.Y;
 
-                int x = Math.Min(r.Next(0, Settings.Instance.fieldSize.Width) * cellSize.Width, Settings.Instance.fieldSizePx.Width);
-                int y = Math.Min(r.Next(0, Settings.Instance.fieldSize.Height) * cellSize.Height, Settings.Instance.fieldSizePx.Height);
+                switch (Enum.GetName(typeof(Directions), direction))
+                {
+                    case "Up":
+                        y = Math.Min(y + cellSize.Height, Settings.Instance.fieldSizePx.Height - cellSize.Height);
+                        break;
+                    case "Right":
+                        x = Math.Min(x + cellSize.Width, Settings.Instance.fieldSizePx.Width - cellSize.Width);
+                        break;
+                    case "Down":
+                        y = Math.Max(y - cellSize.Height, 0);
+                        break;
+                    case "Left":
+                        x = Math.Max(x - cellSize.Width, 0);
+                        break;
+                }
+
                 updateRectPosition(x, y);
 
                 lastUpdate = deltaTime;
             }
         }
-        private void updateRectPosition(int x, int y)
+        private void updateRectPosition(float x, float y)
         {
             this.rect.X = x;
             this.rect.Y = y;
         }
+    }
+
+    enum Directions
+    {
+        Up,
+        Right,
+        Down,
+        Left
     }
 }
