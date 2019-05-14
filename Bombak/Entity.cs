@@ -9,11 +9,11 @@ namespace Bombak
 {
     abstract class Entity
     {
-        protected Point position;
-        protected Size size;
+        protected PointF position;
+        protected SizeF size;
         protected Color color;
-        protected Rectangle rect;
-        protected float lastUpdate;
+        protected RectangleF rect;
+        protected float lastUpdate = 0.00f;
 
         public Entity()
         {
