@@ -13,7 +13,7 @@ namespace Bombak
         protected SizeF size;
         protected Color color;
         protected RectangleF rect;
-        protected float lastUpdate = 0.00f;
+        protected float lastUpdate = 0.05f;
 
         public Entity()
         {
