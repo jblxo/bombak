@@ -47,16 +47,18 @@ namespace Bombak
 
         private void drawEntities(List<Entity> entities, Graphics g)
         {
-            foreach(Entity entity in entities)
+            for (int i = 0; i < entities.Count; i++)
             {
+                Entity entity = entities[i];
                 entity.Draw(g);
             }
         }
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
-            drawEntities(EntityFactory.Instance.Runners, e.Graphics);
             drawField(e.Graphics);
+            drawEntities(EntityFactory.Instance.Runners, e.Graphics);
+            drawEntities(EntityFactory.Instance.Bombs, e.Graphics);
         }
     }
 }
