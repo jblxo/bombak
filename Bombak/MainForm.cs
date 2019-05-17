@@ -131,10 +131,18 @@ namespace Bombak
         {
             EntityFactory.Instance.thanosRunners();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            EntityFactory.Instance.IMRunners();
+        }
+
         private void Canvas_MouseClick(object sender, MouseEventArgs e)
         {
             EntityFactory.Instance.MousePosition = new PointF(e.X, e.Y);
             EntityFactory.Instance.createBomb(deltaTime);
         }
+
+        
     }
 }
