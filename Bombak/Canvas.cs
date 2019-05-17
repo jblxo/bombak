@@ -56,9 +56,9 @@ namespace Bombak
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
-            drawField(e.Graphics);
-            drawEntities(EntityFactory.Instance.Runners, e.Graphics);
             drawEntities(EntityFactory.Instance.Bombs, e.Graphics);
+            drawEntities(EntityFactory.Instance.Runners, e.Graphics);
+            drawField(e.Graphics);
         }
     }
 }

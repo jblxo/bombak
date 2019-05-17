@@ -133,7 +133,7 @@ namespace Bombak
         }
         private void Canvas_MouseClick(object sender, MouseEventArgs e)
         {
-            EntityFactory.Instance.MousePosition = new PointF(e.X, e.Y);
+            EntityFactory.Instance.MousePosition = new PointF(e.X - Settings.Instance.cellSize.Width/2, e.Y - Settings.Instance.cellSize.Height / 2);
             EntityFactory.Instance.createBomb(deltaTime);
         }
     }
