@@ -9,25 +9,33 @@ namespace Bombak
 {
     class Bomb : Entity
     {
-        private int radius = 3;
+        private float radius = 3f;
         private Color color = Color.PaleVioletRed;
-        private double delay = 3.0;
+        private float delay = 1.5f;
+        private float detonationTime = 0.0f;
 
-        public Bomb(Point position)
+        public Bomb(PointF position, float deltaTime)
         {
+            this.detonationTime = deltaTime + delay;
+            this.color = Color.Black;
             this.position = position;
-            SizeF computedSize = new SizeF(this.size.Width, this.size.Height);
+            SizeF computedSize = new SizeF(Settings.Instance.cellSize.Width, Settings.Instance.cellSize.Height);
             this.rect = new RectangleF(this.position, computedSize);
         }
 
         public override void Draw(Graphics g)
         {
             g.FillEllipse(new SolidBrush(this.color), rect);
+            g.DrawEllipse(Pens.Red, rect);
         }
 
         public override void Update(float deltaTime)
         {
-            throw new NotImplementedException();
+            if(deltaTime > detonationTime)
+            {
+                Console.WriteLine("BOOOM");
+                EntityFactory.Instance.Bombs.Remove(this);
+            }
         }
     }
 }

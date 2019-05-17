@@ -17,10 +17,11 @@ namespace Bombak
 
         public List<Entity> Runners => this.runners;
         public List<Entity> RunnersToBeAdded => this.runnersToBeAdded;
+        public List<Entity> Bombs => this.bombs;
 
         private static Random r = new Random();
-        private Point mousePosition = new Point();
-        public Point MousePosition
+        private PointF mousePosition = new PointF();
+        public PointF MousePosition
         {
             get { return mousePosition; }
             set { mousePosition = value; }
@@ -53,9 +54,9 @@ namespace Bombak
             
         }
 
-        public void createBomb()
+        public void createBomb(float deltaTime)
         {
-            bombs.Add(new Bomb(mousePosition));
+            bombs.Add(new Bomb(mousePosition, deltaTime));
         }
 
         public void addRunners()

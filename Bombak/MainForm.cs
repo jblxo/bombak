@@ -38,12 +38,7 @@ namespace Bombak
             {
                 Settings.Instance.cellSize.Width = Settings.Instance.fieldSizePx.Width / y;
                 Settings.Instance.cellSize.Height = Settings.Instance.fieldSizePx.Height / x;
-            }
-            
-
-            Console.WriteLine(Settings.Instance.cellSize.Width + " " + Settings.Instance.cellSize.Height);
-
-            
+            } 
 
             updateThread = new Thread(new ThreadStart(updateThreadFunc));
             drawThread = new Thread(new ThreadStart(drawThreadFunc));
@@ -64,12 +59,19 @@ namespace Bombak
 
                     EntityFactory.Instance.addRunners();
 
-                    foreach(Entity runner in EntityFactory.Instance.Runners)
+                    for (int i = 0; i < EntityFactory.Instance.Runners.Count; i++)
                     {
+                        Entity runner = EntityFactory.Instance.Runners[i];
                         runner.Update(deltaTime);
-
-                        Thread.Sleep(50);
                     }
+
+                    for (int i = 0; i < EntityFactory.Instance.Bombs.Count; i++)
+                    {
+                        Entity bomb = EntityFactory.Instance.Bombs[i];
+                        bomb.Update(deltaTime);
+                    }
+
+                    Thread.Sleep(50);
                 }
             }
             catch (Exception e)
@@ -119,6 +121,7 @@ namespace Bombak
             appRunning = false;
             EntityFactory.Instance.Runners.Clear();
             EntityFactory.Instance.RunnersToBeAdded.Clear();
+            EntityFactory.Instance.Bombs.Clear();
             e.Cancel = true;
             this.Hide();
             this.Parent = null;
@@ -127,6 +130,11 @@ namespace Bombak
         private void button2_Click(object sender, EventArgs e)
         {
             EntityFactory.Instance.thanosRunners();
+        }
+        private void Canvas_MouseClick(object sender, MouseEventArgs e)
+        {
+            EntityFactory.Instance.MousePosition = new PointF(e.X, e.Y);
+            EntityFactory.Instance.createBomb(deltaTime);
         }
     }
 }

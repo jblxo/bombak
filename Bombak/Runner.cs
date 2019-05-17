@@ -15,7 +15,7 @@ namespace Bombak
 
         public Runner(PointF p) : base()
         {
-            this.speed = (float) r.Next(1, 50) / 10;
+            this.speed = this.speed + (r.Next(2, 5) / 10);
             this.cellSize.Width = Settings.Instance.cellSize.Width;
             this.cellSize.Height = Settings.Instance.cellSize.Height;
             int red = r.Next(0, 256);
@@ -35,7 +35,7 @@ namespace Bombak
 
         public override void Update(float deltaTime)
         {
-            if (deltaTime > lastUpdate * speed)
+            if (deltaTime > lastUpdate + speed)
             {
                 int direction = r.Next(0, 4);
                 float x = this.rect.X;
