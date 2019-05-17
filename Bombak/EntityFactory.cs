@@ -40,6 +40,19 @@ namespace Bombak
             runnersToBeAdded.Add(new Runner(new PointF(x, y)));
         }
 
+        public void thanosRunners()
+        {
+            int count = runners.Count;
+            Random r = new Random();
+            int rr;
+            for (int i = 0; i < count/2; i++)
+            {
+                rr = r.Next(0, count - 1);
+                runners.RemoveAt(rr);
+            }
+            
+        }
+
         public void createBomb()
         {
             bombs.Add(new Bomb(mousePosition));
