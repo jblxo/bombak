@@ -48,10 +48,20 @@ namespace Bombak
             int rr;
             for (int i = 0; i < count/2; i++)
             {
-                rr = r.Next(0, count - 1);
+                rr = r.Next(0, count - 2);
                 runners.RemoveAt(rr);
             }
-            
+            Console.WriteLine(runners.Count);
+        }
+        public void IMRunners()
+        {
+            int count = runners.Count;
+            for (int i = 0; i <= count/2; i++)
+            {
+                createRunner();
+            }
+            addRunners();
+            Console.WriteLine(runners.Count);
         }
 
         public void createBomb(float deltaTime)
