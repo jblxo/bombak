@@ -29,8 +29,21 @@ namespace Bombak
             x = Settings.Instance.fieldSize.Width;
             y = Settings.Instance.fieldSize.Height;
 
-            Settings.Instance.cellSize.Width = Settings.Instance.fieldSizePx.Width / (y * (y - x) + 1) / x;
-            Settings.Instance.cellSize.Height = Settings.Instance.fieldSizePx.Height / (x * (x - y) + 1) / y;
+            if(y == x)
+            {
+                Settings.Instance.cellSize.Width = Settings.Instance.fieldSizePx.Width / x;
+                Settings.Instance.cellSize.Height = Settings.Instance.fieldSizePx.Height / y;
+            }
+            else
+            {
+                Settings.Instance.cellSize.Width = Settings.Instance.fieldSizePx.Width / y;
+                Settings.Instance.cellSize.Height = Settings.Instance.fieldSizePx.Height / x;
+            }
+            
+
+            Console.WriteLine(Settings.Instance.cellSize.Width + " " + Settings.Instance.cellSize.Height);
+
+            
 
             updateThread = new Thread(new ThreadStart(updateThreadFunc));
             drawThread = new Thread(new ThreadStart(drawThreadFunc));
