@@ -49,9 +49,11 @@ namespace Bombak
             for (int i = 0; i < count/2; i++)
             {
                 rr = r.Next(0, count - 2);
+                Console.WriteLine(runners[rr] + "-" + rr);
                 runners.RemoveAt(rr);
+                count = runners.Count;
             }
-            Console.WriteLine(runners.Count);
+            
         }
         public void IMRunners()
         {
