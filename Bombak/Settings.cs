@@ -13,7 +13,7 @@ namespace Bombak
         public SizeF fieldSize = new SizeF(10f, 10f);
         public SizeF fieldSizePx = new SizeF(501f, 501f);
         public SizeF cellSize = new SizeF();
-        public float speed = 1f;
+        public float speed = 0f;
         public Settings() { }
     }
 }

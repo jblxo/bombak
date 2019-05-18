@@ -12,12 +12,12 @@ namespace Bombak
         public static EntityFactory Instance = new EntityFactory();
 
         private List<Runner> runners;
-        private List<Entity> bombs;
+        private List<Bomb> bombs;
         private List<Runner> runnersToBeAdded;
 
         public List<Runner> Runners => this.runners;
         public List<Runner> RunnersToBeAdded => this.runnersToBeAdded;
-        public List<Entity> Bombs => this.bombs;
+        public List<Bomb> Bombs => this.bombs;
 
         private static Random r = new Random();
         private PointF mousePosition = new PointF();
@@ -31,7 +31,7 @@ namespace Bombak
         {
             runners = new List<Runner>();
             runnersToBeAdded = new List<Runner>();
-            bombs = new List<Entity>();
+            bombs = new List<Bomb>();
         }
 
         public void createRunner()

@@ -14,6 +14,7 @@ namespace Bombak
         private float delay = 1.5f;
         private float detonationTime = 0.0f;
         private RectangleF radiusRect;
+        public RectangleF RadiusRect => this.radiusRect;
         private float detonationStep = 360.0f;
 
         public Bomb(PointF position, float deltaTime)
@@ -28,7 +29,7 @@ namespace Bombak
 
         public override void Draw(Graphics g)
         {
-            g.FillPie(Brushes.Beige, radiusRect.X, radiusRect.Y, radiusRect.Height, radiusRect.Height, 0, detonationStep);
+            g.FillPie(Brushes.YellowGreen, radiusRect.X, radiusRect.Y, radiusRect.Height, radiusRect.Height, 0, detonationStep);
             g.FillEllipse(new SolidBrush(this.color), rect);
             g.DrawEllipse(Pens.Red, rect);
             g.DrawEllipse(Pens.Red, radiusRect);
@@ -36,12 +37,13 @@ namespace Bombak
 
         public override void Update(float deltaTime)
         {
-            if(deltaTime > detonationTime)
+            float step = 360f / ((delay + Settings.Instance.speed) / 0.05f);
+            if (deltaTime > detonationTime + Settings.Instance.speed)
             {
                 EntityFactory.Instance.Bombs.Remove(this);
             } else
             {
-                detonationStep -= 12f;
+                detonationStep -= step;
             }
         }
     }

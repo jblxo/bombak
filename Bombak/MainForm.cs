@@ -84,7 +84,7 @@ namespace Bombak
         
         private void generateRunners()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 EntityFactory.Instance.createRunner();
             }
@@ -144,6 +144,9 @@ namespace Bombak
             EntityFactory.Instance.createBomb(deltaTime);
         }
 
-        
+        private void SpeedController_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Instance.speed = (float) speedController.Value / 10f;
+        }
     }
 }
