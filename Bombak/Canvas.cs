@@ -45,11 +45,11 @@ namespace Bombak
             }
         }
 
-        private void drawEntities(List<Entity> entities, Graphics g)
+        private void drawBombs(List<Bomb> bombs, Graphics g)
         {
-            for (int i = 0; i < entities.Count; i++)
+            for (int i = 0; i < bombs.Count; i++)
             {
-                Entity entity = entities[i];
+                Entity entity = bombs[i];
                 entity.Draw(g);
             }
         }
@@ -64,7 +64,7 @@ namespace Bombak
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
-            drawEntities(EntityFactory.Instance.Bombs, e.Graphics);
+            drawBombs(EntityFactory.Instance.Bombs, e.Graphics);
             drawRunners(EntityFactory.Instance.Runners, e.Graphics);
             drawField(e.Graphics);
         }

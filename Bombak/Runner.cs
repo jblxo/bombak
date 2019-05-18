@@ -36,7 +36,7 @@ namespace Bombak
 
         public override void Update(float deltaTime)
         {
-            if (deltaTime > lastUpdate + speed)
+            if (deltaTime > lastUpdate + speed + Settings.Instance.speed)
             {
                 int direction = r.Next(0, 4);
                 if (bombsInRange.Count > 0)
@@ -95,15 +95,15 @@ namespace Bombak
             }
         }
 
-        public void checkBombs(List<Entity> bombs)
+        public void checkBombs(List<Bomb> bombs)
         {
             bombsInRange.Clear();
-            foreach (Entity bomb in bombs)
+            foreach (Bomb bomb in bombs)
             {
-                double ac = Math.Abs(bomb.position.X - this.rect.X);
-                double bc = Math.Abs(bomb.position.Y - this.rect.Y);
+                double ac = Math.Abs(bomb.RadiusRect.X + Settings.Instance.cellSize.Width / 2 - this.rect.X);
+                double bc = Math.Abs(bomb.RadiusRect.Y + Settings.Instance.cellSize.Height / 2 - this.rect.Y);
                 float vzdalenost = (float)Math.Sqrt(Math.Pow(ac,2) + Math.Pow(bc,2));
-                if(vzdalenost <= 80f)
+                if(vzdalenost <= 140f)
                 {
                     bombsInRange.Add(bomb);
                 }
