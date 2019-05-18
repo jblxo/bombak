@@ -61,7 +61,8 @@ namespace Bombak
 
                     for (int i = 0; i < EntityFactory.Instance.Runners.Count; i++)
                     {
-                        Entity runner = EntityFactory.Instance.Runners[i];
+                        Runner runner = EntityFactory.Instance.Runners[i];
+                        runner.checkBombs(EntityFactory.Instance.Bombs);
                         runner.Update(deltaTime);
                     }
 

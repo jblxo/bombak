@@ -11,12 +11,12 @@ namespace Bombak
     {
         public static EntityFactory Instance = new EntityFactory();
 
-        private List<Entity> runners;
+        private List<Runner> runners;
         private List<Entity> bombs;
-        private List<Entity> runnersToBeAdded;
+        private List<Runner> runnersToBeAdded;
 
-        public List<Entity> Runners => this.runners;
-        public List<Entity> RunnersToBeAdded => this.runnersToBeAdded;
+        public List<Runner> Runners => this.runners;
+        public List<Runner> RunnersToBeAdded => this.runnersToBeAdded;
         public List<Entity> Bombs => this.bombs;
 
         private static Random r = new Random();
@@ -29,8 +29,8 @@ namespace Bombak
 
         public EntityFactory()
         {
-            runners = new List<Entity>();
-            runnersToBeAdded = new List<Entity>();
+            runners = new List<Runner>();
+            runnersToBeAdded = new List<Runner>();
             bombs = new List<Entity>();
         }
 
