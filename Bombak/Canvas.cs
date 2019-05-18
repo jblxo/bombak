@@ -53,11 +53,19 @@ namespace Bombak
                 entity.Draw(g);
             }
         }
+        private void drawRunners(List<Runner> runners, Graphics g)
+        {
+            for (int i = 0; i < runners.Count; i++)
+            {
+                Runner runner = runners[i];
+                runner.Draw(g);
+            }
+        }
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
             drawEntities(EntityFactory.Instance.Bombs, e.Graphics);
-            drawEntities(EntityFactory.Instance.Runners, e.Graphics);
+            drawRunners(EntityFactory.Instance.Runners, e.Graphics);
             drawField(e.Graphics);
         }
     }

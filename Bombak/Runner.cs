@@ -12,6 +12,7 @@ namespace Bombak
         private static Random r = new Random();
         private SizeF cellSize = new Size();
         private float speed = 0.5f;
+        private List<Entity> bombsInRange = new List<Entity>();
 
         public Runner(PointF p) : base()
         {
@@ -38,6 +39,37 @@ namespace Bombak
             if (deltaTime > lastUpdate + speed)
             {
                 int direction = r.Next(0, 4);
+                if (bombsInRange.Count > 0)
+                {
+                    foreach (Entity bomba in bombsInRange)
+                    {
+                        double vx = this.rect.X - bomba.position.X;
+                        double vy = this.rect.Y - bomba.position.Y;
+                        if (Math.Abs(vx) > Math.Abs(vy))
+                        {
+                            if(vx > 0)
+                            {
+                                direction = 1;
+                            }
+                            else
+                            {
+                                direction = 3;
+                            }
+                        }
+                        else
+                        {
+                            if(vy > 0)
+                            {
+                                direction = 0;
+                            }
+                            else
+                            {
+                                direction = 2;
+                            }
+                        }
+                    }
+                }
+                
                 float x = this.rect.X;
                 float y = this.rect.Y;
 
@@ -62,6 +94,22 @@ namespace Bombak
                 lastUpdate = deltaTime;
             }
         }
+
+        public void checkBombs(List<Entity> bombs)
+        {
+            bombsInRange.Clear();
+            foreach (Entity bomb in bombs)
+            {
+                double ac = Math.Abs(bomb.position.X - this.rect.X);
+                double bc = Math.Abs(bomb.position.Y - this.rect.Y);
+                float vzdalenost = (float)Math.Sqrt(Math.Pow(ac,2) + Math.Pow(bc,2));
+                if(vzdalenost <= 80f)
+                {
+                    bombsInRange.Add(bomb);
+                }
+            }
+        }
+
         private void updateRectPosition(float x, float y)
         {
             this.rect.X = x;
