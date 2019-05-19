@@ -43,8 +43,8 @@ namespace Bombak
                 {
                     foreach (Bomb bomba in bombsInRange)
                     {
-                        double vx = this.rect.X + Settings.Instance.cellSize.Width / 2 - bomba.RadiusRect.X;
-                        double vy = this.rect.Y + Settings.Instance.cellSize.Height / 2 - bomba.RadiusRect.Y;
+                        float vx = this.rect.X + Settings.Instance.cellSize.Width / 2 - bomba.RadiusRect.X+75-100;
+                        float vy = (this.rect.Y + Settings.Instance.cellSize.Height / 2) - bomba.RadiusRect.Y+75-100;
                         if (Math.Abs(vx) > Math.Abs(vy))
                         {
                             if (vx > 0)
