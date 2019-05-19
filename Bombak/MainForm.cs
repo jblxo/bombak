@@ -141,7 +141,18 @@ namespace Bombak
         private void Canvas_MouseClick(object sender, MouseEventArgs e)
         {
             EntityFactory.Instance.MousePosition = new PointF(e.X - Settings.Instance.cellSize.Width/2, e.Y - Settings.Instance.cellSize.Height / 2);
-            EntityFactory.Instance.createBomb(deltaTime);
+
+            if (e.Button == MouseButtons.Right)
+            {
+                EntityFactory.Instance.createBomb(deltaTime);
+            }
+            else
+            {
+                
+                float ex = (float)(Math.Floor(e.X/ Settings.Instance.cellSize.Width))* Settings.Instance.cellSize.Width;
+                float ey = (float)(Math.Floor(e.Y / Settings.Instance.cellSize.Height))* Settings.Instance.cellSize.Height;
+                EntityFactory.Instance.createCustomRunner(new PointF(ex,ey));
+            }
         }
 
         private void SpeedController_ValueChanged(object sender, EventArgs e)

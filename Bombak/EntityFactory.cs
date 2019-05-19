@@ -40,6 +40,10 @@ namespace Bombak
             float y = Math.Min(r.Next(0, (int) Settings.Instance.fieldSize.Height) * Settings.Instance.cellSize.Height, Settings.Instance.fieldSizePx.Height);
             runnersToBeAdded.Add(new Runner(new PointF(x, y)));
         }
+        public void createCustomRunner(PointF point)
+        {
+            runnersToBeAdded.Add(new Runner(point));
+        }
 
         public void thanosRunners()
         {
