@@ -41,13 +41,13 @@ namespace Bombak
                 int direction = r.Next(0, 4);
                 if (bombsInRange.Count > 0)
                 {
-                    foreach (Entity bomba in bombsInRange)
+                    foreach (Bomb bomba in bombsInRange)
                     {
-                        double vx = this.rect.X - bomba.position.X;
-                        double vy = this.rect.Y - bomba.position.Y;
+                        double vx = this.rect.X + Settings.Instance.cellSize.Width / 2 - bomba.RadiusRect.X;
+                        double vy = this.rect.Y + Settings.Instance.cellSize.Height / 2 - bomba.RadiusRect.Y;
                         if (Math.Abs(vx) > Math.Abs(vy))
                         {
-                            if(vx > 0)
+                            if (vx > 0)
                             {
                                 direction = 1;
                             }
@@ -103,7 +103,7 @@ namespace Bombak
                 double ac = Math.Abs(bomb.RadiusRect.X + Settings.Instance.cellSize.Width / 2 - this.rect.X);
                 double bc = Math.Abs(bomb.RadiusRect.Y + Settings.Instance.cellSize.Height / 2 - this.rect.Y);
                 float vzdalenost = (float)Math.Sqrt(Math.Pow(ac,2) + Math.Pow(bc,2));
-                if(vzdalenost <= 140f)
+                if(vzdalenost <= 180f)
                 {
                     bombsInRange.Add(bomb);
                 }
