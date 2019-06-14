@@ -16,7 +16,7 @@ namespace Bombak
 
         public Runner(PointF p) : base()
         {
-            this.speed = this.speed + (r.Next(2, 5) / 10);
+            this.speed = this.speed + (r.Next(2, 25) / 10);
             this.cellSize.Width = Settings.Instance.cellSize.Width;
             this.cellSize.Height = Settings.Instance.cellSize.Height;
             int red = r.Next(0, 256);
